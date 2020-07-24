@@ -34,17 +34,17 @@ public class BalancedParentheses {
 					return false;
 				else
 					parenthesesStack.pop();
-			}
-				
+			}		
 		}
 		
+		//in the end, stack must be empty
 		return parenthesesStack.isEmpty()?true:false;
 	}
 	
 	public static void main(String[] args) {
 		
-		System.out.println(is_balanced("[()]{}{[()()]()}"));//true
-		System.out.println(is_balanced("[(])"));//false
-		System.out.println(is_balanced(""));//true
+		org.junit.Assert.assertTrue(is_balanced("[()]{}{[()()]()}"));		
+		org.junit.Assert.assertFalse(is_balanced("[(])"));
+		org.junit.Assert.assertTrue(is_balanced(""));
 	}
 }

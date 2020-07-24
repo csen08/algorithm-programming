@@ -34,6 +34,8 @@ public class GenerateParentheses {
 	
 	//String buffer will not help, because the value stays in the buffer
 	//below not working
+	
+	//UPDATE: Below is working after we remove the element from string buffer after recursion
 	public static void printIt_using_StringBuffer(List<String>l, StringBuffer sb, int opening, int closing, int n) {
 		
 		if (opening == n && closing == n) {//base case
@@ -44,13 +46,14 @@ public class GenerateParentheses {
 		
 		if (opening < n) { 
 			printIt_using_StringBuffer(l, sb.append("{"), opening+1, closing, n);
+			sb.deleteCharAt(sb.length()-1);
 		}
 		if (closing < opening) {
 			printIt_using_StringBuffer(l, sb.append("}"), opening, closing+1, n);
+			sb.deleteCharAt(sb.length()-1);
 		}
 		
-		sb.deleteCharAt(sb.length()-1);
-		System.out.println("ending"+opening +closing);
+//		sb.deleteCharAt(sb.length()-1); //UPDATE: not here
 	}
 	
 	
@@ -81,9 +84,11 @@ public class GenerateParentheses {
 	public static void main(String[] args) {
 		
 		int n=2;
-		StringBuffer s = new StringBuffer();
+		int left=0,right=0;
+
 		List<String> l = new ArrayList<String>(); //A holder to hold all combination
-		printIt(l, "", 0, 0, n);
+		
+		//printIt(l, "", 0, 0, n);
 		//printIt(l, n, 0, 0, s);
 		
 		char[] c = new char[2*n];
@@ -91,7 +96,7 @@ public class GenerateParentheses {
 		//printIt_char_array(l, n, 0, 0, c,0);
 		
 		//Using string buffer
-		printIt_using_StringBuffer(l, new StringBuffer(), 0, 0, n);
+		printIt_using_StringBuffer(l, new StringBuffer(), left, right, n);
 	}
 	
 }
