@@ -33,10 +33,11 @@ public class MaxWidthOfBinaryTree {
 		int max_width=0;
 		q.offer(makePair(root,0));
 		while (!q.isEmpty()) {
-			int qsize = q.size();
+			
+			int size = q.size();
 			int leftmost = (Integer)q.peek().get(1); //leftmost index in this level
-			int rightmost = (Integer)q.peek().get(1);
-			for (int i=0;i<qsize;i++){ //at each level, loop over the elements
+			int rightmost = leftmost;
+			for (int i=0;i<size;i++){ //at each level, loop over the elements
 				List<Object> l = q.poll();
 				TreeNode tn=(TreeNode)l.get(0);
 				int t_idx = (Integer)l.get(1);
