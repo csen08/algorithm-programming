@@ -7,6 +7,8 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Assert;
+
 
 public class MaxWidthOfBinaryTree {
 
@@ -60,7 +62,25 @@ public class MaxWidthOfBinaryTree {
 	}
 
 	public static void main(String[] args) {
-
+		
+		/**
+		 *     
+			       1
+		         /   \
+		        3     2
+		       / \
+		      5   3
+		 */
+		MaxWidthOfBinaryTree instance = new MaxWidthOfBinaryTree();
+		TreeNode root = instance.new TreeNode(1);
+		root.left = instance.new TreeNode(3);
+		root.right = instance.new TreeNode(2);
+		root.left.left = instance.new TreeNode(5);
+		root.left.right = instance.new TreeNode(3);
+		System.out.println(widthOfBinaryTree(root));
+		
+		Assert.assertEquals(2, widthOfBinaryTree(root));
+		
 		/**
 		 *     
 			       1
@@ -70,15 +90,10 @@ public class MaxWidthOfBinaryTree {
 		      5   3     9 
 		 */
 
-		MaxWidthOfBinaryTree instance = new MaxWidthOfBinaryTree();
-		TreeNode root = instance.new TreeNode(1);
-		root.left = instance.new TreeNode(3);
-		root.right = instance.new TreeNode(2);
-		root.left.left = instance.new TreeNode(5);
-		root.left.right = instance.new TreeNode(3);
 		root.right.right = instance.new TreeNode(9);
 
 		System.out.println(widthOfBinaryTree(root));
+		Assert.assertEquals(4, widthOfBinaryTree(root));
 		
 		/**
 		 *     
@@ -99,6 +114,7 @@ public class MaxWidthOfBinaryTree {
 		root2.right.right.right = instance.new TreeNode(7);
 
 		System.out.println(widthOfBinaryTree(root2));
+		Assert.assertEquals(8, widthOfBinaryTree(root2));
 	}
 
 }
