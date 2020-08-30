@@ -2,46 +2,55 @@ package programming.subarray;
 
 public class MaximumSumSubarray {
 	
-	int maxSum(int[] arr) {
+	static int maxSum(int[] arr) {
 		
-		int max_sum=0;//Integer.MIN_VALUE when negative value allowed
+		int max_so_far=0;//when negative value allowed, it would be Integer.MIN_VALUE
 		int curr_sum=0;
 		
 		for (int x : arr) {
 			curr_sum=Math.max(0, curr_sum+x);//0 or when negative allowed, it would be x.
-			max_sum=Math.max(max_sum, curr_sum);
+			max_so_far=Math.max(max_so_far, curr_sum);
 		}
-		int s=-1,t=-1;
-        for (char c: "as".toCharArray()){
-            if (c=='#'){
-                s=(s==-1) ? s :s--;
-            
-            }
-        }
 		
-		return max_sum;
+		return max_so_far;
 	}
 	
-	public int maxProduct(int[] nums) {
-	    int[] max = new int[nums.length];
-	    int[] min = new int[nums.length];
-	 
-	    max[0] = min[0] = nums[0];
-	    int result = nums[0];
-	 
-	    for(int i=1; i<nums.length; i++){
-	        if(nums[i]>0){
-	            max[i]=Math.max(nums[i], max[i-1]*nums[i]);
-	            min[i]=Math.min(nums[i], min[i-1]*nums[i]);
-	        }else{
-	            max[i]=Math.max(nums[i], min[i-1]*nums[i]);
-	            min[i]=Math.min(nums[i], max[i-1]*nums[i]);
-	        }
-	 
-	        result = Math.max(result, max[i]);
-	    }
-	 
-	    return result;
+	static int maxSumIndex(int[] arr) {
+		
+		int current_sum=0;
+		int max_so_far=0;
+		
+		int current_start=0, current_end=-1, best_start=0, best_end=0;
+		
+		for (int a : arr) {
+			current_end++;
+			//current_sum=Math.max(0,  current_sum+a); //if sum becomes negative, set it to zero
+			//max_so_far=Math.max(max_so_far, max_till_here);
+			
+			if (current_sum<0) {
+				current_sum=0;//reset
+				current_start=current_end;
+			}
+			else {
+				current_sum=current_sum+a;
+			}
+			
+			if (max_so_far<current_sum) {
+				max_so_far=current_sum;
+				best_start=current_start;
+				best_end=current_end+1; //exclusive, so 1 added
+			}
+		}
+		
+		System.out.println(best_start);
+		System.out.println(best_end);
+		return max_so_far;
+	}
+	
+	public static void main(String[] args) {
+		
+		System.out.println(maxSum(new int[] {1,2,3,5,-6,4,0,10}));
+		System.out.println(maxSumIndex(new int[] {1,2,3,5,-6,4,0,10}));
 	}
 
 }
